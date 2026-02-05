@@ -1,196 +1,119 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>💘 Valentine?</title>
-  <style>
-    :root { --bg: #0b0b12; --card: #151527; --text: #f7f7ff; --muted:#b9b9d6; }
-    * { box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    body {
-      margin: 0; height: 100vh; display: grid; place-items: center;
-      background: radial-gradient(1200px 800px at 50% 30%, #2a1b4a 0%, var(--bg) 55%);
-      color: var(--text);
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>💖 Valentine</title>
 
-    /* Backdrop + modal */
-    .backdrop {
-      position: fixed; inset: 0; display: grid; place-items: center;
-      background: rgba(0,0,0,.55);
-      padding: 18px;
-    }
-    .modal {
-      width: min(520px, 94vw);
-      background: linear-gradient(180deg, #1b1b33, var(--card));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 18px;
-      padding: 22px 20px 18px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.55);
-      position: relative;
-      overflow: hidden;
-    }
-    .modal:before {
-      content:"";
-      position:absolute; inset:-80px;
-      background: radial-gradient(circle at 20% 20%, rgba(255,105,180,.22), transparent 50%),
-                  radial-gradient(circle at 80% 30%, rgba(124,92,255,.25), transparent 55%),
-                  radial-gradient(circle at 40% 90%, rgba(255,255,255,.08), transparent 55%);
-      filter: blur(0px);
-      pointer-events:none;
-    }
-    h1 { margin: 0 0 6px; font-size: 28px; position: relative; }
-    p  { margin: 0 0 18px; color: var(--muted); position: relative; }
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#2b1055,#7597de);
+  font-family:Arial, sans-serif;
+}
 
-    /* Button area */
-    .arena {
-      position: relative;
-      height: 220px;
-      border-radius: 14px;
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(0,0,0,.18);
-      overflow: hidden;
-    }
-    .yes {
-      position: absolute;
-      left: 50%; top: 55%;
-      transform: translate(-50%, -50%);
-      padding: 16px 26px;
-      font-size: 20px;
-      font-weight: 700;
-      border-radius: 14px;
-      border: 0;
-      color: #12121a;
-      cursor: pointer;
-      background: linear-gradient(180deg, #ff7ac8, #ff3ea5);
-      box-shadow: 0 14px 30px rgba(255, 62, 165, .32);
-      min-width: 180px;
-    }
-    .yes:active { transform: translate(-50%, -50%) scale(.98); }
+.modal{
+  background:#1c1c2e;
+  padding:25px;
+  border-radius:16px;
+  text-align:center;
+  color:white;
+  width:90%;
+  max-width:400px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
 
-    .no {
-      position: absolute;
-      padding: 4px 7px;          /* tiny */
-      font-size: 10px;           /* tiny */
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      cursor: pointer;
-      user-select: none;
-      touch-action: manipulation;
-    }
+.arena{
+  position:relative;
+  height:200px;
+  margin-top:20px;
+  border:2px dashed rgba(255,255,255,.3);
+  border-radius:12px;
+}
 
-    /* cute footer */
-    .hint { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,.55); position: relative; }
-    .toast {
-      position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
-      background: rgba(20,20,35,.92);
-      border: 1px solid rgba(255,255,255,.14);
-      padding: 10px 12px;
-      border-radius: 999px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .25s ease;
-      max-width: min(92vw, 680px);
-      text-align: center;
-    }
-    .toast.show { opacity: 1; }
-  </style>
+button{
+  border:none;
+  cursor:pointer;
+}
+
+#yes{
+  padding:15px 28px;
+  font-size:20px;
+  border-radius:14px;
+  background:#ff4fa3;
+  color:#111;
+  font-weight:bold;
+  position:absolute;
+  left:50%;
+  top:55%;
+  transform:translate(-50%,-50%);
+}
+
+#no{
+  font-size:10px;
+  padding:4px 7px;
+  border-radius:10px;
+  background:#ffffff15;
+  color:white;
+  position:absolute;
+}
+
+#kitty{
+  display:none;
+  margin-top:20px;
+}
+
+#kitty img{
+  width:180px;
+}
+</style>
 </head>
 
 <body>
-  <div class="backdrop" id="backdrop">
-    <div class="modal" role="dialog" aria-modal="true">
-      <h1>Will you be my Valentine? 💘</h1>
-      <p>Choose wisely… 😇</p>
 
-      <div class="arena" id="arena">
-        <button class="yes" id="yesBtn">YES 💖</button>
-        <button class="no" id="noBtn" aria-label="No">no</button>
-      </div>
+<div class="modal">
+  <h2>Sana, will you be my Valentines? 💘</h2>
 
-      <div class="hint">Tip: the “no” button is… shy.</div>
-    </div>
+  <div class="arena" id="arena">
+    <button id="yes">YES 💖</button>
+    <button id="no">no</button>
   </div>
 
-  <div class="toast" id="toast">YAYYYYY! 💞🎉 Screenshot this and send it 😄</div>
+  <div id="kitty">
+    <h3>YAYYYY!!! 🥰</h3>
+    <img src="https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif" alt="happy kitty">
+  </div>
+</div>
 
-  <script>
-    const arena = document.getElementById("arena");
-    const noBtn  = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const toast  = document.getElementById("toast");
+<script>
+const arena = document.getElementById("arena");
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+const kitty = document.getElementById("kitty");
 
-    // Place NO initially near a corner
-    function placeNo(x, y) {
-      const pad = 8;
-      const r = arena.getBoundingClientRect();
-      const bw = noBtn.offsetWidth;
-      const bh = noBtn.offsetHeight;
+function moveNo(){
+  const w = arena.clientWidth - no.offsetWidth;
+  const h = arena.clientHeight - no.offsetHeight;
 
-      // clamp to arena
-      const nx = Math.max(pad, Math.min(x, r.width  - bw - pad));
-      const ny = Math.max(pad, Math.min(y, r.height - bh - pad));
+  no.style.left = Math.random()*w + "px";
+  no.style.top = Math.random()*h + "px";
+}
 
-      noBtn.style.left = nx + "px";
-      noBtn.style.top  = ny + "px";
-    }
+moveNo();
 
-    // corners to "escape" to
-    function randomCorner() {
-      const r = arena.getBoundingClientRect();
-      const bw = noBtn.offsetWidth;
-      const bh = noBtn.offsetHeight;
-      const pad = 10;
-      const corners = [
-        { x: pad, y: pad },                                     // top-left
-        { x: r.width - bw - pad, y: pad },                      // top-right
-        { x: pad, y: r.height - bh - pad },                     // bottom-left
-        { x: r.width - bw - pad, y: r.height - bh - pad },      // bottom-right
-      ];
-      return corners[Math.floor(Math.random() * corners.length)];
-    }
+no.addEventListener("mouseenter", moveNo);
+no.addEventListener("touchstart", moveNo);
+no.addEventListener("click", moveNo);
 
-    // Start in bottom-right
-    requestAnimationFrame(() => {
-      const c = randomCorner();
-      placeNo(c.x, c.y);
-    });
+yes.addEventListener("click", ()=>{
+  arena.style.display="none";
+  kitty.style.display="block";
+});
+</script>
 
-    // Escape behavior (mouse + touch)
-    function escape() {
-      const c = randomCorner();
-      placeNo(c.x, c.y);
-    }
-
-    noBtn.addEventListener("mouseenter", escape);
-    noBtn.addEventListener("mouseover", escape);
-
-    // On touch devices: move away when finger gets close
-    arena.addEventListener("touchstart", (e) => {
-      const t = e.touches[0];
-      const r = arena.getBoundingClientRect();
-      const x = t.clientX - r.left;
-      const y = t.clientY - r.top;
-
-      const nb = noBtn.getBoundingClientRect();
-      const noCenterX = (nb.left - r.left) + nb.width / 2;
-      const noCenterY = (nb.top  - r.top)  + nb.height / 2;
-
-      const dist = Math.hypot(x - noCenterX, y - noCenterY);
-      if (dist < 90) escape();
-    }, { passive: true });
-
-    // If someone somehow clicks NO
-    noBtn.addEventListener("click", escape);
-
-    // YES celebration
-    yesBtn.addEventListener("click", () => {
-      toast.classList.add("show");
-      yesBtn.textContent = "YESS!! 💞";
-      // optional: disable the no button after yes
-      noBtn.disabled = true;
-      setTimeout(() => toast.classList.remove("show"), 3500);
-    });
-  </script>
 </body>
 </html>
